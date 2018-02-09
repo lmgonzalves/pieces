@@ -95,6 +95,7 @@ The following options can be passed as an `Array` too, each value for the corres
 After the pieces are built (new `Pieces` instance created), they can be animated through operations, and you can use all of these possible properties to do it. Just provide the properties that you want to update inside the `options` argument.
 
 | Name                    | Type                    | Description |
+|-------------------------|-------------------------|-------------|
 |`x`                      | `Integer`               | Pieces `x` position. |
 |`y`                      | `Integer`               | Pieces `y` position. |
 |`w`                      | `Integer`               | Pieces width. |
