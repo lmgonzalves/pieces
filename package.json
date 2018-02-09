@@ -1,0 +1,37 @@
+{
+  "name": "pieces",
+  "version": "1.0.0",
+  "description": "Javascript library to draw and animate images, texts or SVG paths as multiple rectangular pieces",
+  "main": "dist/pieces.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lmgonzalves/pieces.git"
+  },
+  "keywords": [
+    "animation",
+    "canvas",
+    "image"
+  ],
+  "author": "lmgonzalves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lmgonzalves/pieces/issues"
+  },
+  "homepage": "https://github.com/lmgonzalves/pieces",
+  "engine": {
+    "node": ">=6.9.1"
+  },
+  "dependencies": {
+    "animejs": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.2.0",
+    "gulp": "^3.9.1",
+    "lodash": "^4.16.4",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1"
+  }
+}
