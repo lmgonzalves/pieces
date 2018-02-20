@@ -276,7 +276,8 @@ Pieces.prototype = {
     },
     initImage: function initImage(image) {
         var o = this.o[this.o.length - 1];
-        var padding = o.padding ? o.padding.split(' ').map(function (p) {
+        var padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(function (p) {
             return parseFloat(p);
         }) : [0, 0, 0, 0];
 
@@ -301,9 +302,11 @@ Pieces.prototype = {
     },
     initText: function initText(text) {
         var o = this.o[this.o.length - 1];
-        var padding = o.padding ? o.padding.split(' ').map(function (p) {
+        var padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(function (p) {
             return parseFloat(p);
         }) : [0, 0, 0, 0];
+        var fontSize = is.fnc(o.fontSize) ? o.fontSize() : o.fontSize;
 
         var _createCanvas2 = createCanvas();
 
@@ -311,9 +314,9 @@ Pieces.prototype = {
         var ctx = _createCanvas2.ctx;
 
         ctx.textBaseline = 'bottom';
-        ctx.font = o.fontWeight + ' ' + o.fontSize + 'px ' + o.fontFamily;
+        ctx.font = o.fontWeight + ' ' + fontSize + 'px ' + o.fontFamily;
         canvas.width = ctx.measureText(text).width + padding[1] + padding[3];
-        canvas.height = o.fontSize + padding[0] + padding[2];
+        canvas.height = fontSize + padding[0] + padding[2];
         if (o.backgroundColor) {
             ctx.fillStyle = o.backgroundColor;
             if (o.backgroundRadius) {
@@ -324,14 +327,15 @@ Pieces.prototype = {
             }
         }
         ctx.textBaseline = "bottom";
-        ctx.font = o.fontWeight + ' ' + o.fontSize + 'px ' + o.fontFamily;
+        ctx.font = o.fontWeight + ' ' + fontSize + 'px ' + o.fontFamily;
         ctx.fillStyle = o.color;
-        ctx.fillText(text, padding[3], o.fontSize + padding[0]);
+        ctx.fillText(text, padding[3], fontSize + padding[0]);
         this.drawList.push(canvas);
     },
     initPath: function initPath(path) {
         var o = this.o[this.o.length - 1];
-        var padding = o.padding ? o.padding.split(' ').map(function (p) {
+        var padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(function (p) {
             return parseFloat(p);
         }) : [0, 0, 0, 0];
 
@@ -387,7 +391,7 @@ Pieces.prototype = {
             var extraX = _ref.extraX;
             var extraY = _ref.extraY;
 
-            var _ref2 = is.obj(o.translate) ? o.translate : { translateX: o.translate, translateY: o.translate };
+            var _ref2 = is.fnc(o.translate) ? o.translate() : is.obj(o.translate) ? o.translate : { translateX: o.translate, translateY: o.translate };
 
             var translateX = _ref2.translateX;
             var translateY = _ref2.translateY;
@@ -552,9 +556,10 @@ Pieces.prototype = {
     },
     renderGhost: function renderGhost(options, item) {
         var o = this.o[item.index];
+        var fontSize = is.fnc(o.fontSize) ? o.fontSize() : o.fontSize;
         if (item.ghost && o.text) {
             options.ctx.textBaseline = 'bottom';
-            options.ctx.font = o.fontWeight + ' ' + o.fontSize + 'px ' + o.fontFamily;
+            options.ctx.font = o.fontWeight + ' ' + fontSize + 'px ' + o.fontFamily;
             options.ctx.strokeStyle = o.color;
             options.ctx.setLineDash(item.ghostDashArray);
             options.ctx.lineDashOffset = item.ghostDashOffset;

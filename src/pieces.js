@@ -221,7 +221,8 @@ Pieces.prototype = {
 
     initImage(image) {
         const o = this.o[this.o.length - 1];
-        const padding = o.padding ? o.padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
+        let padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
         const {canvas, ctx} = createCanvas();
         canvas.width = image.width + 2 + padding[1] + padding[3];
         canvas.height = image.height + 2 + padding[0] + padding[2];
@@ -240,12 +241,14 @@ Pieces.prototype = {
 
     initText(text) {
         const o = this.o[this.o.length - 1];
-        const padding = o.padding ? o.padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
+        let padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
+        const fontSize = is.fnc(o.fontSize) ? o.fontSize() : o.fontSize;
         const {canvas, ctx} = createCanvas();
         ctx.textBaseline = 'bottom';
-        ctx.font = `${o.fontWeight} ${o.fontSize}px ${o.fontFamily}`;
+        ctx.font = `${o.fontWeight} ${fontSize}px ${o.fontFamily}`;
         canvas.width = ctx.measureText(text).width + padding[1] + padding[3];
-        canvas.height = o.fontSize + padding[0] + padding[2];
+        canvas.height = fontSize + padding[0] + padding[2];
         if (o.backgroundColor) {
             ctx.fillStyle = o.backgroundColor;
             if (o.backgroundRadius) {
@@ -256,15 +259,16 @@ Pieces.prototype = {
             }
         }
         ctx.textBaseline = "bottom";
-        ctx.font = `${o.fontWeight} ${o.fontSize}px ${o.fontFamily}`;
+        ctx.font = `${o.fontWeight} ${fontSize}px ${o.fontFamily}`;
         ctx.fillStyle = o.color;
-        ctx.fillText(text, padding[3], o.fontSize + padding[0]);
+        ctx.fillText(text, padding[3], fontSize + padding[0]);
         this.drawList.push(canvas);
     },
 
     initPath(path) {
         const o = this.o[this.o.length - 1];
-        const padding = o.padding ? o.padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
+        let padding = is.fnc(o.padding) ? o.padding() : o.padding;
+        padding = padding ? padding.split(' ').map(p => parseFloat(p)) : [0, 0, 0, 0];
         const {canvas, ctx} = createCanvas();
         canvas.width = o.svgWidth + padding[1] + padding[3];
         canvas.height = o.svgHeight + padding[0] + padding[2];
@@ -296,7 +300,7 @@ Pieces.prototype = {
             o = this.o[index];
 
             const {extraX, extraY} = is.obj(o.extraSpacing) ? o.extraSpacing : {extraX: o.extraSpacing, extraY: o.extraSpacing};
-            const {translateX, translateY} = is.obj(o.translate) ? o.translate : {translateX: o.translate, translateY: o.translate};
+            const {translateX, translateY} = is.fnc(o.translate) ? o.translate() : (is.obj(o.translate) ? o.translate : {translateX: o.translate, translateY: o.translate});
 
             if (options.x === 'centerAll') {
                 x = this.width / 2 - img.width / 2;
@@ -450,9 +454,10 @@ Pieces.prototype = {
 
     renderGhost(options, item) {
         const o = this.o[item.index];
+        const fontSize = is.fnc(o.fontSize) ? o.fontSize() : o.fontSize;
         if (item.ghost && o.text) {
             options.ctx.textBaseline = 'bottom';
-            options.ctx.font = `${o.fontWeight} ${o.fontSize}px ${o.fontFamily}`;
+            options.ctx.font = `${o.fontWeight} ${fontSize}px ${o.fontFamily}`;
             options.ctx.strokeStyle = o.color;
             options.ctx.setLineDash(item.ghostDashArray);
             options.ctx.lineDashOffset = item.ghostDashOffset;
