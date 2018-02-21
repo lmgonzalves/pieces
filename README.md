@@ -2,9 +2,9 @@
 
 Javascript library to draw and animate images, texts or SVG paths as multiple rectangular pieces.
 
-**DEMO** (coming soon)
+[**DEMO**](https://tympanus.net/Tutorials/PiecesSlider/)
 
-**TUTORIAL** (coming soon)
+[**TUTORIAL**](https://tympanus.net/codrops/2018/02/21/animated-fragment-slideshow/)
 
 Visit [**lmgonzalves.com**](https://lmgonzalves.com/) to see it in action!
 
