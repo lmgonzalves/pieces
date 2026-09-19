@@ -6,7 +6,7 @@ Javascript library to draw and animate images, texts or SVG paths as multiple re
 
 [**TUTORIAL**](https://tympanus.net/codrops/2018/02/21/animated-fragment-slideshow/)
 
-Visit [**lmgonzalves.com**](https://lmgonzalves.com/) to see it in action!
+See it in action in the [**Codrops demo**](https://tympanus.net/Tutorials/PiecesSlider/)!
 
 ## Basic usage
 
